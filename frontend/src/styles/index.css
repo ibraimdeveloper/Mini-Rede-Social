@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: #0f172a;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+html[data-theme="dark"] body {
+  background: #020617;
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] .bg-white {
+  background-color: #0f172a !important;
+}
+
+html[data-theme="dark"] .bg-\[\#F5F6FA\],
+html[data-theme="dark"] .bg-\[\#f5f6fa\] {
+  background-color: #020617 !important;
+}
+
+html[data-theme="dark"] .bg-\[\#ececec\] {
+  background-color: #1e293b !important;
+}
+
+html[data-theme="dark"] .bg-\[\#eef2f7\] {
+  background-color: #1e293b !important;
+}
+
+html[data-theme="dark"] .bg-slate-50,
+html[data-theme="dark"] .bg-slate-100 {
+  background-color: #111827 !important;
+}
+
+html[data-theme="dark"] .border-slate-200,
+html[data-theme="dark"] .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+html[data-theme="dark"] .border-white {
+  border-color: #0f172a !important;
+}
+
+html[data-theme="dark"] .text-black {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .text-slate-800 {
+  color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] .text-slate-700,
+html[data-theme="dark"] .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html[data-theme="dark"] .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: #64748b;
+}
+
+html[data-theme="dark"] .hover\:bg-slate-50:hover {
+  background-color: #1e293b !important;
+}
+
+html[data-theme="dark"] .hover\:bg-slate-100:hover {
+  background-color: #1f2937 !important;
+}
+
+html[data-theme="dark"] .hover\:bg-slate-300:hover {
+  background-color: #334155 !important;
+}
+
+html[data-theme="dark"] .bg-emerald-100 {
+  background-color: rgba(16, 185, 129, 0.18) !important;
+}
+
+html[data-theme="dark"] .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+
+html[data-theme="dark"] .shadow-sm,
+html[data-theme="dark"] .shadow-md {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28) !important;
+}

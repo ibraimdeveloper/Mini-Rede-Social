@@ -1,0 +1,18 @@
+FROM node:22-bookworm-slim
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Expose port 5173 for Vite dev server
+EXPOSE 5173
+
+# Start development server with Vite
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

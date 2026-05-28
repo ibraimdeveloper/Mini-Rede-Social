@@ -1,0 +1,90 @@
+services:
+
+
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 1️⃣ Banco de Dados (PostgreSQL)
+  dbpostgres:
+    image: postgres:15-alpine
+    container_name: dbpostgres
+    restart: on-failure
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  # 2️⃣ Backend (Django)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
+    container_name: backend
+    restart: on-failure
+    env_file:
+      - .env
+    volumes:
+      - ./backend/app:/app                 # Hot reload do código
+      - ./backend/docker/entrypoint.sh:/app/entrypoint.sh   # Monta entrypoint fixo
+      - media_volume:/app/media            # Persistência de uploads
+      - static_volume:/app/staticfiles
+    ports:
+      - "8000:8000"
+    depends_on:
+      dbpostgres:
+        condition: service_healthy
+      redis:                         
+        condition: service_healthy
+    entrypoint: ["/app/entrypoint.sh"]
+    command: daphne -b 0.0.0.0 -p 8000 config.asgi:application
+
+  # 3️⃣ Frontend (React + Vite)
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    image: frontend
+    restart: on-failure
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  # 4️⃣ Nginx (HTTPS e Proxy Reverso)
+  nginx:
+    build: ./nginx
+    container_name: transcendence_nginx
+    image: nginx
+    restart: on-failure
+    ports:
+      - "8443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - media_volume:/app/media
+      - static_volume:/app/staticfiles
+    depends_on:
+      - backend
+      - frontend
+
+# Volumes nomeados
+volumes:
+  postgres_data:
+  media_volume:
+  static_volume:
