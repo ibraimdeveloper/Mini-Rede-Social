@@ -113,9 +113,16 @@ Contribuições são bem-vindas! Segue estes passos:
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
-**bbenito** · [ibraimaugusto60@gmail.com](mailto:benilsonbenito@gmail.com)
+## 👨‍💻 Autores
+
+- [Ibraim Augusto Diarra](https://github.com/ibraimdeveloper)
+- [Benilson Kanza Benito](https://github.com/benilsonbenito7)
+- [Eliandra Neto](https://github.com/EllyNeto)
+- [Firmino Guerra](https://github.com/fguerra42)
+- [Daniel Vemba](https://github.com/Mr-lorddev)
+
 
 ---
 
